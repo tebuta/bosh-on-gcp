@@ -57,9 +57,9 @@ fi
 
 for api_to_enable in "${GCP_APIS_TO_ENABLE[@]}"
 do
-    if [[ $(gcloud beta --project ${GCP_PROJECT} service-management list --enabled | grep -c "${api_to_enable}") -eq 0 ]]
+    if [[ $(gcloud beta --project ${GCP_PROJECT} services list --enabled | grep -c "${api_to_enable}") -eq 0 ]]
     then
-        gcloud beta --project ${GCP_PROJECT} service-management enable ${api_to_enable}
+        gcloud beta --project ${GCP_PROJECT} services enable ${api_to_enable}
         fail_on_error $?
     else
         echo "${api_to_enable} already seems to be enabled on this project: ${GCP_PROJECT}"
